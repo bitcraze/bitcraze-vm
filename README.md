@@ -38,7 +38,7 @@ The Bitcraze VM can either be downloaded via torrent or via direct download:
 
 * [Bitcraze VM 0.4 torrent](http://tracker.bitcraze.se/torrents/Bitcraze%20VM%200.4.ova.torrent "Bitcraze VM 0.4 torrent") (preferred)
 
-* [Bitcraze VM 0.4 direct download](mega.co.nz/#!ScQh1KRQ!azKj-0LhnIDyWH5mCvauZTWwLzM4lbJWi9MTBmT_nEI "Bitcraze VM 0.3 direct download") (limited to 6 simultanious downloads)
+* [Bitcraze VM 0.4 direct download](https://mega.co.nz/#!ScQh1KRQ!azKj-0LhnIDyWH5mCvauZTWwLzM4lbJWi9MTBmT_nEI "Bitcraze VM 0.4 direct download") (limited to 6 simultanious downloads)
 
 Installing
 ----------
