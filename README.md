@@ -6,7 +6,7 @@ The Bitcraze VM contains everything you need for running the Bitcraze projects a
 
 There's a list of what's included:
 
-* Xubuntu 13.04 pre-configured
+* Xubuntu 13.10 pre-configured
 
 * UDEV rules and pre-configured USB filtering for the Crazyradio and it's bootloader (NRF BOOT)
 
@@ -36,9 +36,9 @@ Downloading
 -----------
 The Bitcraze VM can either be downloaded via torrent or via direct download:
 
-* [Bitcraze VM 0.3 torrent](http://taffanel.org/tracker/torrents/Bitcraze%20VM%200.3.ova.torrent "Bitcraze VM 0.3 torrent") (preferred)
+* [Bitcraze VM 0.4 torrent](http://tracker.bitcraze.se/torrents/Bitcraze%20VM%200.4.ova.torrent "Bitcraze VM 0.4 torrent") (preferred)
 
-* [Bitcraze VM 0.3 direct download](https://mega.co.nz/#!ScQh1KRQ!azKj-0LhnIDyWH5mCvauZTWwLzM4lbJWi9MTBmT_nEI "Bitcraze VM 0.3 direct download") (limited to 6 simultanious downloads)
+* [Bitcraze VM 0.4 direct download](mega.co.nz/#!ScQh1KRQ!azKj-0LhnIDyWH5mCvauZTWwLzM4lbJWi9MTBmT_nEI "Bitcraze VM 0.3 direct download") (limited to 6 simultanious downloads)
 
 Installing
 ----------
