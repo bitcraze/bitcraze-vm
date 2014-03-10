@@ -10,7 +10,7 @@ There's a list of what's included:
 
 * UDEV rules and pre-configured USB filtering for the Crazyradio and it's bootloader (NRF BOOT)
 
-* All our projects pre-cloned
+* Most of our projects pre-cloned
 
 * The VirtualBox guest additions pre-installed
 
@@ -19,6 +19,14 @@ There's a list of what's included:
 * Mercurial and TortoiseHG
 
 * pyusb, pygame and pyqt
+
+* PyQtGraph
+
+* PyCharm
+
+* Oracle Java JRE (for PyCharm)
+
+* KDE Marble built with Python-bindings
 
 * Qt4 and QtDesigner
 
@@ -30,15 +38,17 @@ There's a list of what's included:
 
 * SDCC 3.2 for compiling of Crazyradio firmware
 
+* EmbSys RegView for Eclipse
+
 For more info see our [wiki](http://wiki.bitcraze.se/projects:virtualmachine:index/ "Bitcraze VM Wiki").
 
 Downloading
 -----------
 The Bitcraze VM can either be downloaded via torrent or via direct download:
 
-* [Bitcraze VM 0.4 torrent](http://tracker.bitcraze.se/torrents/Bitcraze%20VM%200.4.ova.torrent "Bitcraze VM 0.4 torrent") (preferred)
+* [Bitcraze VM 0.5 torrent](http://files.bitcraze.se/dl/Bitcraze_VM_0.5.ova.torrent "Bitcraze VM 0.5 torrent") (preferred)
 
-* [Bitcraze VM 0.4 direct download](https://mega.co.nz/#!ScQh1KRQ!azKj-0LhnIDyWH5mCvauZTWwLzM4lbJWi9MTBmT_nEI "Bitcraze VM 0.4 direct download") (limited to 6 simultanious downloads)
+* [Bitcraze VM 0.5 direct download](http://files.bitcraze.se/dl/Bitcraze_VM_0.5.ova "Bitcraze VM 0.5 direct download")
 
 Installing
 ----------
