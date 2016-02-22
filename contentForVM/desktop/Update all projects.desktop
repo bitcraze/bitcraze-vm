@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Update all projects
+Comment=Blindly updates all the project repos
+Exec=/home/bitcraze/bin/update_all_projects.sh
+Icon=
+Path=
+Terminal=true
+StartupNotify=false
