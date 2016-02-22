@@ -1,0 +1,45 @@
+{
+  "variables" : {
+      "user"	: 	"bitcraze",
+      "password"  : 	"crazyflie",
+      "vm-name": 	"BitcrazeVM_0.9"
+  },
+  "builders": [{
+      "type": "virtualbox-iso",
+      "vm_name": "{{user `vm-name`}}",
+      "guest_os_type": "Ubuntu",
+      "format": "ova",
+      "guest_additions_mode": "disable",
+      "disk_size": "30000",
+      "hard_drive_interface": "sata",
+      
+      "vboxmanage": [
+	["modifyvm", "{{.Name}}", "--memory", "1024", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbehci", "on", "--nestedpaging", "off"],
+	["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
+      ],
+      
+      "iso_url": "xubuntu-14.04.4-desktop-i386.iso",
+      "iso_checksum": "2138d30d5978092b4c054ed623d54fdb",
+      "iso_checksum_type": "md5",
+      
+      "ssh_password": "{{user `password`}}",
+      "ssh_username": "{{user `user`}}",
+      "ssh_wait_timeout": "10000s",
+      
+      "boot_command": [
+        "<enter><enter><esc><enter> <wait>",
+        "/casper/vmlinuz url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "hostname={{ .Name }} ",
+        "initrd=/casper/initrd.lz boot=casper automatic-ubiquity noprompt --<enter><wait>"
+      ],
+      "boot_wait": "4s",
+      "http_directory": "http",
+      "shutdown_command": "echo {{user `password`}} | sudo -S shutdown -P now",
+      
+      "vboxmanage_post": [
+	["modifyhd", "output-virtualbox-iso/{{.Name}}.vdi", "--compact"]
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,5 @@
+/*.iso
+/packerlog*.txt
+/output-virtualbox-iso/
+/output-virtualbox-ovf/
+/.project

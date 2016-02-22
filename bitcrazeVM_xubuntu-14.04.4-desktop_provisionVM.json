@@ -1,0 +1,69 @@
+{
+  "variables" : {
+      "user"	: 	"bitcraze",
+      "password"  : 	"crazyflie",
+      "vm-name": 	"BitcrazeVM_0.9",
+      "contentDir":	"contentForVM",
+      "gccFile": 	"gcc-arm-none-eabi-4_9-2014q4-20141203-linux.tar.bz2",
+      "pycharmFile": 	"pycharm-community-5.0.4.tar.gz",
+      "eclipseFile":	"eclipse-cpp-mars-1-linux-gtk.tar.gz"
+  },
+  "builders": [{
+    "type": "virtualbox-ovf",
+    "vm_name": "{{user `vm-name`}}",
+    "source_path": "output-virtualbox-iso/{{user `vm-name`}}.ova",
+    "format": "ova",
+
+    "vboxmanage": [
+      ["modifyvm", "{{.Name}}", "--memory", "1024", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbehci", "on", "--nestedpaging", "off"],
+      ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
+    ],
+    "import_opts": "importtovdi",
+    
+    "ssh_username": "{{user `user`}}",
+    "ssh_password": "{{user `password`}}",
+    "ssh_wait_timeout": "10000s",
+    
+    "boot_wait": "30s",
+    
+    "virtualbox_version_file": ".vbox_version",
+    
+    "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now"
+  }],
+  "provisioners": [{
+    "type": "file",
+    "source": "{{user `contentDir`}}/update_all_projects.sh",
+    "destination": "/home/bitcraze/update_all_projects.sh"
+  },
+  {
+    "type": "file",
+    "source": "{{user `contentDir`}}/desktop/",
+    "destination": "/home/bitcraze/Desktop"
+  },
+  {
+    "type": "file",
+    "source": "{{user `contentDir`}}/pictures/",
+    "destination": "/home/bitcraze/Pictures"
+  },
+  {
+    "type": "file",
+    "source": "{{user `contentDir`}}/{{user `gccFile`}}",
+    "destination": "/home/bitcraze/{{user `gccFile`}}"
+  },
+  {
+    "type": "file",
+    "source": "{{user `contentDir`}}/{{user `pycharmFile`}}",
+    "destination": "/home/bitcraze/{{user `pycharmFile`}}"
+  },
+  {
+    "type": "file",
+    "source": "{{user `contentDir`}}/{{user `eclipseFile`}}",
+    "destination": "/home/bitcraze/{{user `eclipseFile`}}"
+  },
+  {
+    "type": "shell",
+    "script": "provision.sh",
+    "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+  }]
+}
+
