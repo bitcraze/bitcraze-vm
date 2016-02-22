@@ -104,11 +104,9 @@ Please take a look at the log files ```packerlog_create.txt``` and ```packerlog_
 
 Downloading
 -----------
-The Bitcraze VM can either be downloaded via torrent or via direct download:
+The Bitcraze VM can either be downloaded via torrent or via direct download.
 
-* [Bitcraze VM 0.8 torrent](http://files.bitcraze.se/dl/Bitcraze_VM_0.8.ova.torrent "Bitcraze VM 0.8 torrent") (preferred)
-
-* [Bitcraze VM 0.8 direct download](http://files.bitcraze.se/dl/Bitcraze_VM_0.8.ova "Bitcraze VM 0.8 direct download")
+[Bitcraze VM download page](https://wiki.bitcraze.io/projects:virtualmachine:index)
 
 Installing
 ----------
