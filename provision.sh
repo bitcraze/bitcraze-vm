@@ -38,7 +38,7 @@ sh -c 'echo SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0483\", ATTRS{idProduct}==\"5
 mkdir ~/projects
 cd ~/projects
 git clone git://github.com/bitcraze/crazyflie-clients-python.git
-git clone git://github.com/bitcraze/crazyflie-firmware.git
+git clone git://github.com/bitcraze/crazyflie-firmware.git --recursive
 git clone git://github.com/bitcraze/crazyflie-bootloader.git
 git clone git://github.com/bitcraze/crazyradio-firmware.git
 git clone git://github.com/bitcraze/crazyflie-android-client.git
