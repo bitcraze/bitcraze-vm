@@ -28,6 +28,15 @@ sh /tmp/isomount/VBoxLinuxAdditions.run
 umount /tmp/isomount
 rm -rf isomount ~/$VBOX_ISO
 
+# Install ROS
+echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
+apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
+apt-get update
+apt-get install ros-indigo-desktop-full
+rosdep init
+rosdep update
+echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+
 # Adding udev rules for Crazyradio and Crazyflie
 usermod -a -G plugdev $USER
 sh -c 'echo SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"1915\", ATTRS{idProduct}==\"7777\", MODE=\"0664\", GROUP=\"plugdev\" > /etc/udev/rules.d/99-crazyradio.rules'
@@ -38,6 +47,7 @@ sh -c 'echo SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0483\", ATTRS{idProduct}==\"5
 mkdir ~/projects
 cd ~/projects
 git clone git://github.com/bitcraze/crazyflie-clients-python.git
+git clone git://github.com/bitcraze/crazyflie-lib-python.git
 git clone git://github.com/bitcraze/crazyflie-firmware.git --recursive
 git clone git://github.com/bitcraze/crazyflie-bootloader.git
 git clone git://github.com/bitcraze/crazyradio-firmware.git
@@ -46,9 +56,21 @@ git clone git://github.com/bitcraze/crazyflie2-exp-template-electronics.git
 git clone git://github.com/bitcraze/crazyflie2-stm-bootloader.git
 git clone git://github.com/bitcraze/crazyflie2-nrf-bootloader.git
 git clone git://github.com/bitcraze/crazyflie2-nrf-firmware.git
+git clone git://github.com/bitcraze/lps-node-firmware.git --recursive
 cd ..
 chown bitcraze:bitcraze -R projects
 ln -s ~/projects ~/Desktop/projects
+
+# Create a ROS workspace with the Loco Positioning projects
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+git clone git://github.com/bitcraze/lps-ros.git
+git clone git://github.com/whoenig/crazyflie_ros
+catkin_make
+cd ../..
+chown bitcraze:bitcraze -R catkin_ws
+ln -s ~/catkin_ws ~/Desktop/catkin_ws
 
 # Setup gcc-arm-none-eabi toolchain
 tar xjf gcc-arm-none-eabi-*.tar.bz2
@@ -71,6 +93,9 @@ rm eclipse-cpp-*.tar.gz
 # Setup update_all_projects script
 chmod +x ~/update_all_projects.sh
 mv ~/update_all_projects.sh ~/bin/update_all_projects.sh
+
+# Set up crazyflie-clients-python to use crazyflie-lib-python from source
+pip3 install -e ~/projects/crazyflie-lib-python
 
 # Set background image
 #DISPLAY=:0 xfconf-query --channel xfce4-desktop --list

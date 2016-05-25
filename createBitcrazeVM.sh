@@ -19,8 +19,7 @@ ECLIPSE_URL="http://saimei.acc.umu.se/mirror/eclipse.org/technology/epp/download
 
 CONTENT_DIR="contentForVM/"
 
-#TODO: use wildcard
-OVA_FILE=BitcrazeVM_0.9.ova
+OVA_FILE=BitcrazeVM.ova
 
 #Download ISO image (only if it's not already downloaded)
 if [ -f "$ISO_FILE" ]

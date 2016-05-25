@@ -23,6 +23,7 @@ Here is a list of what's included:
 * gedit
 * SDCC 3.2 for compiling of Crazyradio firmware
 * EmbSys RegView for Eclipse
+* ROS
 
 For more info see our [wiki](https://wiki.bitcraze.se/projects:virtualmachine:index/ "Bitcraze VM Wiki").
 
