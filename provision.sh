@@ -71,6 +71,8 @@ catkin_make
 cd ../..
 chown bitcraze:bitcraze -R catkin_ws
 ln -s ~/catkin_ws ~/Desktop/catkin_ws
+echo 'echo -e "Setting up \e[1m\e[32m~/catkin_ws\e[0m ROS workspace."' >> ~/.bashrc
+echo 'source $HOME/catkin_ws/devel/setup.sh' >> ~/.bashrc
 
 # Setup gcc-arm-none-eabi toolchain
 tar xjf gcc-arm-none-eabi-*.tar.bz2
