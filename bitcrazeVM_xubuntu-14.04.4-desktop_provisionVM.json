@@ -2,7 +2,7 @@
   "variables" : {
       "user"	: 	"bitcraze",
       "password"  : 	"crazyflie",
-      "vm-name": 	"BitcrazeVM_0.9",
+      "vm-name": 	"BitcrazeVM",
       "contentDir":	"contentForVM",
       "gccFile": 	"gcc-arm-none-eabi-4_9-2014q4-20141203-linux.tar.bz2",
       "pycharmFile": 	"pycharm-community-5.0.4.tar.gz",

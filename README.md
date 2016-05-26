@@ -90,7 +90,7 @@ This saves a lot of time.
 
 Some steps still have to be done manually:
 
-1. Import the generated OVA file (e.g. ```output-virtualbox-ovf/BitcrazeVM_0.9.ova```) into VirtualBox (File -> Import appliance...)
+1. Import the generated OVA file (e.g. ```output-virtualbox-ovf/BitcrazeVM.ova```) into VirtualBox (File -> Import appliance...)
 2. Start the Bitcraze VM
 3. Open a terminal
 4. Setting up PyCharm

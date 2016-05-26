@@ -1,5 +1,5 @@
-Welcome to the Bitcraze VM Version 0.9
-======================================
+Welcome to the Bitcraze VM
+==========================
 
 The purpose of this virtual machine is to quickly get started with development
 and usage of various Bitcraze projects. It has all of the requirements for

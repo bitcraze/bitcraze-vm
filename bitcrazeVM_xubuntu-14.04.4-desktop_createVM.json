@@ -2,7 +2,7 @@
   "variables" : {
       "user"	: 	"bitcraze",
       "password"  : 	"crazyflie",
-      "vm-name": 	"BitcrazeVM_0.9"
+      "vm-name": 	"BitcrazeVM"
   },
   "builders": [{
       "type": "virtualbox-iso",
