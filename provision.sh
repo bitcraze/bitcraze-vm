@@ -81,34 +81,34 @@ if [ $ENABLE_ROS -eq 1 ]; then
 fi
 
 # Setup gcc-arm-none-eabi toolchain
-tar xjf gcc-arm-none-eabi-*.tar.bz2
+tar --strip-components=1 -xjf gcc-arm-none-eabi-*.tar.bz2
 mkdir -p ~/bin/gcc-arm-none-eabi
 mv gcc-arm-none-eabi-*/ ~/bin/gcc-arm-none-eabi
-echo "\nPATH=\$PATH:$HOME/bin/gcc-arm-none-eabi/bin" >> ~/.bashrc
+echo "\nPATH=\$PATH:$HOME/bin/gcc-arm-none-eabi/bin" >> ~/.profile
 rm gcc-arm-none-eabi-*.tar.bz2
 
 if [ $ENABLE_PYCHARM -eq 1 ]; then
   # Extract PyCharm
   tar xf pycharm-community-*.tar.gz -C /opt/
   mv /opt/pycharm-community-* /opt/pycharm-community
-  echo "\nPATH=\$PATH:/opt/pycharm-community/bin" >> ~/.bashrc
+  echo "\nPATH=\$PATH:/opt/pycharm-community/bin" >> ~/.profile
 fi
 rm pycharm-community-*.tar.gz
 
 # Extract Eclipse
 tar xf eclipse-cpp-mars-1-linux-gtk.tar.gz -C /opt
-echo "\nPATH=\$PATH:/opt/eclipse" >> ~/.bashrc
+echo "\nPATH=\$PATH:/opt/eclipse" >> ~/.profile
 rm eclipse-cpp-mars-1-linux-gtk.tar.gz
 
 # Extract OpenOCD and copy udev rules
 mkdir -p /opt/gnuarmeclipse
 tar xf gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz -C /opt/gnuarmeclipse
-echo "\nPATH=\$PATH:/opt/gnuarmeclipse/openocd/0.9.0-201505190955/bin" >> ~/.bashrc
+echo "\nPATH=\$PATH:/opt/gnuarmeclipse/openocd/0.9.0-201505190955/bin" >> ~/.profile
 rm gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz
 cp /opt/gnuarmeclipse/openocd/0.9.0-201505190955/contrib/99-openocd.rules /etc/udev/rules.d/
 
 #Extract eclipse project folders
-tar xf eclipse-project-files.tar.gz -C ~/projects
+tar xf eclipse-project-files.tar.gz -C ~/
 rm eclipse-project-files.tar.gz
 
 #Install GNU ARM Eclipse plugin
