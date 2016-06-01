@@ -1,0 +1,3 @@
+buildConsole/keepLog=true
+buildConsole/logLocation=/home/bitcraze/workspace/.metadata/.plugins/org.eclipse.cdt.ui/crazyflie-firmware.build.log
+eclipse.preferences.version=1

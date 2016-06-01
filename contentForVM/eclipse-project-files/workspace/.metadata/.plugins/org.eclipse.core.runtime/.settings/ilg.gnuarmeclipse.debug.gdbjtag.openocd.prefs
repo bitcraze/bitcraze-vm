@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+gdb.client.commands=set mem inaccessible-by-default off
+gdb.client.executable=${cross_prefix}gdb${cross_suffix}
+gdb.client.other=
+gdb.openocd.doDebugInRam=false
+gdb.openocd.doInitialReset=true
+gdb.openocd.doPreRunReset=false
+gdb.openocd.enableSemihosting=false
+gdb.openocd.init.other=
+gdb.openocd.initialReset.type=halt
+gdb.openocd.preRun.other=
+gdb.openocd.preRunReset.type=halt
+gdb.server.doStart=true
+gdb.server.executable=${openocd_path}/${openocd_executable}
+gdb.server.other=-f interface/stlink-v2.cfg  -f target/stm32f4x_stlink.cfg -c init -c targets

@@ -1,0 +1,8 @@
+//org.eclipse.ui.commands/state/org.eclipse.ui.navigator.resources.nested.changeProjectPresentation/org.eclipse.ui.commands.radioState=false
+UIActivities.org.eclipse.cdt.debug.dsfgdbActivity=true
+eclipse.preferences.version=1
+ilg.gnuarmeclipse.debug.gdbjtag.peripherals.color.changed=255,255,0
+ilg.gnuarmeclipse.debug.gdbjtag.peripherals.color.changed.light=255,255,221
+ilg.gnuarmeclipse.debug.gdbjtag.peripherals.color.changed.medium=255,255,170
+ilg.gnuarmeclipse.debug.gdbjtag.peripherals.color.readonly=181,255,213
+ilg.gnuarmeclipse.debug.gdbjtag.peripherals.color.writeonly=181,213,255
