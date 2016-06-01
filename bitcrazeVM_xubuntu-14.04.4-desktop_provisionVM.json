@@ -5,7 +5,7 @@
       "vm-name": 	    "BitcrazeVM",
       "contentDir":	    "contentForVM",
       "gccFile": 	    "gcc-arm-none-eabi-4_9-2014q4-20141203-linux.tar.bz2",
-      "pycharmFile": 	"pycharm-community-5.0.4.tar.gz",
+      "pycharmFile": 	"pycharm-community-2016.1.4.tar.gz",
       "eclipseFile":	"eclipse-cpp-mars-1-linux-gtk.tar.gz",
       "eclipsePrj":	    "eclipse-project-files.tar.gz",
       "openocd":        "gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz"
@@ -21,15 +21,15 @@
       ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
     ],
     "import_opts": "importtovdi",
-    
+
     "ssh_username": "{{user `user`}}",
     "ssh_password": "{{user `password`}}",
     "ssh_wait_timeout": "10000s",
-    
+
     "boot_wait": "30s",
-    
+
     "virtualbox_version_file": ".vbox_version",
-    
+
     "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now"
   }],
   "provisioners": [{
@@ -78,4 +78,3 @@
     "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
   }]
 }
-

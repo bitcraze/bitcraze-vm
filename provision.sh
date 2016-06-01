@@ -8,9 +8,9 @@ apt-key update
 apt-get update
 
 #apt-get -y upgrade
-apt-get -y install build-essential git gitg sdcc python2.7 python-pip python-usb python-qt4 qt4-designer kicad libsdl2-dev openjdk-7-jdk meld leafpad dfu-util || { echo 'apt-get install failed' ; exit 1; }
+apt-get -y install build-essential git gitg sdcc python2.7 python-pip python-usb python-qt4 python3-numpy qt4-designer kicad libsdl2-dev openjdk-7-jdk meld leafpad dfu-util || { echo 'apt-get install failed' ; exit 1; }
 #apt-get python-pyqtgraph	#The following packages cannot be authenticated!
-pip install pysdl2
+pip -y install pysdl2
 
 # Works only on Ubuntu 15.04+
 apt-get -y install python3 python3-usb python3-pyqt4 python3-pyqtgraph python3-zmq
@@ -28,14 +28,16 @@ sh /tmp/isomount/VBoxLinuxAdditions.run
 umount /tmp/isomount
 rm -rf isomount ~/$VBOX_ISO
 
-# Install ROS
-echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
-apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
-apt-get update
-apt-get -y install ros-indigo-desktop
-rosdep init
-rosdep update
-echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+if [ $ENABLE_ROS -eq 1 ]; then
+  # Install ROS
+  echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
+  apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
+  apt-get update
+  apt-get -y install ros-indigo-desktop-full libusb-1.0-0-dev
+  rosdep init
+  rosdep update
+  echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+fi
 
 # Adding udev rules for Crazyradio and Crazyflie
 usermod -a -G plugdev $USER
@@ -57,22 +59,26 @@ git clone git://github.com/bitcraze/crazyflie2-stm-bootloader.git
 git clone git://github.com/bitcraze/crazyflie2-nrf-bootloader.git
 git clone git://github.com/bitcraze/crazyflie2-nrf-firmware.git
 git clone git://github.com/bitcraze/lps-node-firmware.git --recursive
-cd ..
+cd ~/
 chown bitcraze:bitcraze -R projects
 ln -s ~/projects ~/Desktop/projects
 
-# Create a ROS workspace with the Loco Positioning projects
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws/src
-catkin_init_workspace
-git clone git://github.com/bitcraze/lps-ros.git
-git clone git://github.com/whoenig/crazyflie_ros
-catkin_make
-cd ../..
-chown bitcraze:bitcraze -R catkin_ws
-ln -s ~/catkin_ws ~/Desktop/catkin_ws
-echo 'echo -e "Setting up \e[1m\e[32m~/catkin_ws\e[0m ROS workspace."' >> ~/.bashrc
-echo 'source $HOME/catkin_ws/devel/setup.sh' >> ~/.bashrc
+if [ $ENABLE_ROS -eq 1 ]; then
+  # Create a ROS workspace with the Loco Positioning projects
+  mkdir -p ~/catkin_ws/src
+  cd ~/catkin_ws/src
+  catkin_init_workspace
+  git clone git://github.com/bitcraze/lps-ros.git
+  git clone git://github.com/whoenig/crazyflie_ros
+  cd ~/catkin_ws
+  catkin_make
+  cd ~/
+  chown bitcraze:bitcraze -R ~/catkin_ws
+  chown -R bitcraze:bitcraze ~/.ros
+  ln -s ~/catkin_ws ~/Desktop/catkin_ws
+  echo 'echo -e "Setting up \e[1m\e[32m~/catkin_ws\e[0m ROS workspace."' >> ~/.bashrc
+  echo 'source $HOME/catkin_ws/devel/setup.sh' >> ~/.bashrc
+fi
 
 # Setup gcc-arm-none-eabi toolchain
 tar xjf gcc-arm-none-eabi-*.tar.bz2
@@ -81,10 +87,12 @@ mv gcc-arm-none-eabi-*/ ~/bin/gcc-arm-none-eabi
 echo "\nPATH=\$PATH:$HOME/bin/gcc-arm-none-eabi/bin" >> ~/.bashrc
 rm gcc-arm-none-eabi-*.tar.bz2
 
-# Extract PyCharm
-tar xf pycharm-community-*.tar.gz -C /opt/
-mv /opt/pycharm-community-* /opt/pycharm-community
-echo "\nPATH=\$PATH:/opt/pycharm-community/bin" >> ~/.bashrc
+if [ $ENABLE_PYCHARM -eq 1 ]; then
+  # Extract PyCharm
+  tar xf pycharm-community-*.tar.gz -C /opt/
+  mv /opt/pycharm-community-* /opt/pycharm-community
+  echo "\nPATH=\$PATH:/opt/pycharm-community/bin" >> ~/.bashrc
+fi
 rm pycharm-community-*.tar.gz
 
 # Extract Eclipse
@@ -123,7 +131,7 @@ cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/x
 cp ~/Pictures/vm_background.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png
 
 # Clean up VM
-apt-get autoremove
-apt-get autoclean
-apt-get clean
+apt-get -y autoremove
+apt-get -y autoclean
+apt-get -y clean
 fstrim -v /

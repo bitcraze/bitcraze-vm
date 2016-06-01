@@ -11,7 +11,7 @@ PACKER_FILE2=bitcrazeVM_xubuntu-14.04.4-desktop_provisionVM.json
 GCC_ARM_FILE="gcc-arm-none-eabi-4_9-2014q4-20141203-linux.tar.bz2"
 GCC_ARM_URL="https://launchpad.net/gcc-arm-embedded/4.9/4.9-2014-q4-major/+download/$GCC_ARM_FILE"
 
-PYCHARM_FILE="pycharm-community-5.0.4.tar.gz"
+PYCHARM_FILE="pycharm-community-2016.1.4.tar.gz"
 PYCHARM_URL="https://download.jetbrains.com/python/$PYCHARM_FILE"
 
 ECLIPSE_FILE="eclipse-cpp-mars-1-linux-gtk.tar.gz"
@@ -94,6 +94,13 @@ else
   wget -P $CONTENT_DIR $OPENOCD_URL
 fi
 
+# Compressing eclipse project files in one tgz
+pushd .
+echo "Compressing eclipse-project-files.tar.gz"
+cd $CONTENT_DIR/eclipse-project-files
+tar -czf ../eclipse-project-files.tar.gz *
+popd
+
 #Run packer
 echo "Running packer..."
 export PACKER_LOG=1
@@ -110,5 +117,3 @@ fi
 echo "Starting VM provisioning..."
 export PACKER_LOG_PATH="packerlog_provision.txt"
 packer build $PACKER_FILE2
-
-

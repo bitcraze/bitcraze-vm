@@ -14,16 +14,12 @@ Here is a list of what's included:
 * gnu-arm-none-eabi toolchain and build tools
 * pyusb, pygame and pyqt
 * PyQtGraph
-* PyCharm IDE
-* Oracle Java JRE (for PyCharm)
-* KDE Marble built with Python-bindings
 * Qt4 and QtDesigner
 * KiCad
 * Eclipse for compiling/debugging/flashing (pre-configured for BusBlaster)
 * gedit
 * SDCC 3.2 for compiling of Crazyradio firmware
 * EmbSys RegView for Eclipse
-* ROS
 
 For more info see our [wiki](https://wiki.bitcraze.se/projects:virtualmachine:index/ "Bitcraze VM Wiki").
 
@@ -126,4 +122,3 @@ Pass: crazyflie
 ```
 
 For more information on debugging, building, flashing and updating to the latest version have a look at the [Bitcraze VM Wiki](http://wiki.bitcraze.se/projects:virtualmachine:index/ "Bitcraze VM Wiki")
-
