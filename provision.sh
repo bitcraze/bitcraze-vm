@@ -8,12 +8,12 @@ apt-key update
 apt-get update
 
 #apt-get -y upgrade
-apt-get -y install build-essential git gitg sdcc python2.7 python-pip python-usb python-qt4 qt4-designer kicad libsdl2-dev openocd openjdk-7-jdk meld leafpad dfu-util || { echo 'apt-get install failed' ; exit 1; }
+apt-get -y install build-essential git gitg sdcc python2.7 python-pip python-usb python-qt4 qt4-designer kicad libsdl2-dev openjdk-7-jdk meld leafpad dfu-util || { echo 'apt-get install failed' ; exit 1; }
 #apt-get python-pyqtgraph	#The following packages cannot be authenticated!
 pip install pysdl2
 
 # Works only on Ubuntu 15.04+
-#apt-get -y install python3 python3-usb python3-pyqt4 python3-pyqtgraph python3-zmq
+apt-get -y install python3 python3-usb python3-pyqt4 python3-pyqtgraph python3-zmq
 
 # Necessary on Ubuntu 14.04
 apt-get -y install python3 python3-pip python3-pyqt4 python3-zmq || { echo 'apt-get install failed' ; exit 1; }
@@ -32,7 +32,7 @@ rm -rf isomount ~/$VBOX_ISO
 echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
 apt-get update
-apt-get install ros-indigo-desktop-full
+apt-get -y install ros-indigo-desktop
 rosdep init
 rosdep update
 echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
@@ -82,15 +82,30 @@ echo "\nPATH=\$PATH:$HOME/bin/gcc-arm-none-eabi/bin" >> ~/.bashrc
 rm gcc-arm-none-eabi-*.tar.bz2
 
 # Extract PyCharm
-tar -xf pycharm-community-*.tar.gz -C /opt/
+tar xf pycharm-community-*.tar.gz -C /opt/
 mv /opt/pycharm-community-* /opt/pycharm-community
 echo "\nPATH=\$PATH:/opt/pycharm-community/bin" >> ~/.bashrc
 rm pycharm-community-*.tar.gz
 
 # Extract Eclipse
-tar -xf eclipse-cpp-*.tar.gz -C /opt
+tar xf eclipse-cpp-mars-1-linux-gtk.tar.gz -C /opt
 echo "\nPATH=\$PATH:/opt/eclipse" >> ~/.bashrc
-rm eclipse-cpp-*.tar.gz
+rm eclipse-cpp-mars-1-linux-gtk.tar.gz
+
+# Extract OpenOCD and copy udev rules
+mkdir -p /opt/gnuarmeclipse
+tar xf gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz -C /opt/gnuarmeclipse
+echo "\nPATH=\$PATH:/opt/gnuarmeclipse/openocd/0.9.0-201505190955/bin" >> ~/.bashrc
+rm gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz
+cp /opt/gnuarmeclipse/openocd/0.9.0-201505190955/contrib/99-openocd.rules /etc/udev/rules.d/
+
+#Extract eclipse project folders
+tar xf eclipse-project-files.tar.gz -C ~/projects
+rm eclipse-project-files.tar.gz
+
+#Install GNU ARM Eclipse plugin
+/opt/eclipse/eclipse -clean -consolelog -nosplash -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars,http://gnuarmeclipse.sourceforge.net/updates -installIU ilg.gnuarmeclipse.debug.gdbjtag.openocd,ilg.gnuarmeclipse.debug.gdbjtag.jlink,ilg.gnuarmeclipse.debug.gdbjtag.qemu -tag AddGnuArm -destination /opt/eclipse/ -profile epp.package.cpp
+chown bitcraze:bitcraze -R .eclipse
 
 # Setup update_all_projects script
 chmod +x ~/update_all_projects.sh

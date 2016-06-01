@@ -17,6 +17,12 @@ PYCHARM_URL="https://download.jetbrains.com/python/$PYCHARM_FILE"
 ECLIPSE_FILE="eclipse-cpp-mars-1-linux-gtk.tar.gz"
 ECLIPSE_URL="http://saimei.acc.umu.se/mirror/eclipse.org/technology/epp/downloads/release/mars/1/$ECLIPSE_FILE"
 
+ECLIPSE_GNU_ARM_PLUGIN_FILE="ilg.gnuarmeclipse.repository-2.12.1-201604190915.zip"
+ECLIPSE_GNU_ARM_PLUGIN_URL="https://github.com/gnuarmeclipse/plug-ins/releases/download/v2.12.1-201604190915/$ECLIPSE_GNU_ARM_PLUGIN_FILE"
+
+OPENOCD_FILE="gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz"
+OPENOCD_URL="https://github.com/gnuarmeclipse/openocd/releases/download/gae-0.9.0-20150519/$OPENOCD_FILE"
+
 CONTENT_DIR="contentForVM/"
 
 OVA_FILE=BitcrazeVM.ova
@@ -37,8 +43,9 @@ then
 else
   echo "Packer is not installed. Installing..."
   wget $PACKER_URL
-  unzip packer*.zip $HOME/packer
+  unzip packer*.zip -d $HOME/packer
   sudo ln -s $HOME/packer/packer /usr/bin/packer
+  rm packer*.zip
 fi
 
 #Download GCC ARM (63MB) (only if it's not already downloaded)
@@ -49,6 +56,7 @@ else
   echo "$CONTENT_DIR$GCC_ARM_FILE not found. Starting download..."
   wget -P $CONTENT_DIR $GCC_ARM_URL
 fi
+
 
 #Download Pycharm (130MB) (only if it's not already downloaded)
 if [ -f "$CONTENT_DIR$PYCHARM_FILE" ]
@@ -66,6 +74,24 @@ then
 else
   echo "$CONTENT_DIR$ECLIPSE_FILE not found. Starting download..."
   wget -P $CONTENT_DIR $ECLIPSE_URL
+fi
+
+#Download Eclipse GNU ARM plugin (6MB) (only if it's not already downloaded)
+if [ -f "$CONTENT_DIR$ECLIPSE_GNU_ARM_PLUGIN_FILE" ]
+then
+  echo "$CONTENT_DIR$ECLIPSE_GNU_ARM_PLUGIN_FILE found. Continuing..."
+else
+  echo "$CONTENT_DIR$ECLIPSE_GNU_ARM_PLUGIN_FILE not found. Starting download..."
+  wget -P $CONTENT_DIR $ECLIPSE_GNU_ARM_PLUGIN_URL
+fi
+
+#Download OpenOCD 0.9 (3MB) (only if it's not already downloaded)
+if [ -f "$CONTENT_DIR$OPENOCD_FILE" ]
+then
+  echo "$CONTENT_DIR$OPENOCD_FILE found. Continuing..."
+else
+  echo "$CONTENT_DIR$OPENOCD_FILE not found. Starting download..."
+  wget -P $CONTENT_DIR $OPENOCD_URL
 fi
 
 #Run packer
