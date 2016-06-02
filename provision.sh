@@ -121,6 +121,7 @@ mv ~/update_all_projects.sh ~/bin/update_all_projects.sh
 
 # Set up crazyflie-clients-python to use crazyflie-lib-python from source
 pip3 install -e ~/projects/crazyflie-lib-python
+pip3 install -e ﻿~/projects/crazyflie-clients-python
 
 # Set background image
 #DISPLAY=:0 xfconf-query --channel xfce4-desktop --list
