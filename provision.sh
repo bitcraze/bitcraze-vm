@@ -107,6 +107,9 @@ echo "\nPATH=\$PATH:/opt/gnuarmeclipse/openocd/0.9.0-201505190955/bin" >> ~/.pro
 rm gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz
 cp /opt/gnuarmeclipse/openocd/0.9.0-201505190955/contrib/99-openocd.rules /etc/udev/rules.d/
 
+# Link scripts from openocd to config directory
+ln -s /opt/gnuarmeclipse/openocd/0.9.0-201505190955/scripts ~/.openocd
+
 #Extract eclipse project folders
 tar xf eclipse-project-files.tar.gz -C ~/
 rm eclipse-project-files.tar.gz
@@ -119,10 +122,6 @@ chown bitcraze:bitcraze -R .eclipse
 chmod +x ~/update_all_projects.sh
 mv ~/update_all_projects.sh ~/bin/update_all_projects.sh
 
-# Set up crazyflie-clients-python to use crazyflie-lib-python from source
-pip3 install -e ~/projects/crazyflie-lib-python
-pip3 install -e ﻿~/projects/crazyflie-clients-python
-
 # Set background image
 #DISPLAY=:0 xfconf-query --channel xfce4-desktop --list
 #DISPLAY=:0 xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/image-path --set ~/Pictures/vm_background.jpg
@@ -130,6 +129,21 @@ pip3 install -e ﻿~/projects/crazyflie-clients-python
 #HACK
 cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/xubuntu-wallpaper-old.png
 cp ~/Pictures/vm_background.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png
+
+# Add user to vboxsf group so shares with host can be used
+usermod -a -G vboxsf $USER
+
+# Set up crazyflie-clients-python to use crazyflie-lib-python from source
+sudo -H -u bitcraze bash -c 'pip3 install --user -e ~/projects/crazyflie-lib-python'
+sudo -H -u bitcraze bash -c 'pip3 install --user -e ~/projects/crazyflie-clients-python'
+
+# Disable screen saver (workaround)
+mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old
+
+# Workaround for autosave error in Eclipse
+mkdir -p ~/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/
+touch ~/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.markers
+chown bitcraze:bitcraze -R ~/workspace
 
 # Clean up VM
 apt-get -y autoremove

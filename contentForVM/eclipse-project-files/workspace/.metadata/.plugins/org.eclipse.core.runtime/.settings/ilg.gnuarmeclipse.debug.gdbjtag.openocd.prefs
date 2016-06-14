@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
 gdb.client.commands=set mem inaccessible-by-default off
-gdb.client.executable=${cross_prefix}gdb${cross_suffix}
+gdb.client.executable=${gdb_path}/${gdb_executable}
 gdb.client.other=
 gdb.openocd.doDebugInRam=false
 gdb.openocd.doInitialReset=true
