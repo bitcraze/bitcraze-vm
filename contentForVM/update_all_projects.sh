@@ -8,6 +8,8 @@ do
 		echo "Updating $f"
 		cd $f
 		git pull
+		git submodule init
+		git submodule update --recursive
 		cd ..
 	fi
 done
@@ -18,6 +20,8 @@ do
 		echo "Updating $f"
 		cd $f
 		git pull
+		git submodule init
+		git submodule update --recursive
 		cd ..
 	fi
 done
