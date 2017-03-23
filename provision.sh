@@ -8,7 +8,7 @@ apt-key update
 apt-get update
 
 #apt-get -y upgrade
-apt-get -y install build-essential git gitg sdcc python2.7 python-pip python-usb python-qt4 python3-numpy qt4-designer kicad libsdl2-dev openjdk-7-jdk meld leafpad dfu-util || { echo 'apt-get install failed' ; exit 1; }
+apt-get -y install build-essential git gitg sdcc python2.7 python-pip python-usb python-qt4 python3-pyqt5 python3-numpy qt4-designer kicad libsdl2-dev openjdk-7-jdk meld leafpad dfu-util || { echo 'apt-get install failed' ; exit 1; }
 #apt-get python-pyqtgraph	#The following packages cannot be authenticated!
 pip -y install pysdl2
 
