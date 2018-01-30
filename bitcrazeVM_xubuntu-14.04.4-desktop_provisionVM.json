@@ -54,11 +54,6 @@
   },
   {
     "type": "file",
-    "source": "{{user `contentDir`}}/{{user `pycharmFile`}}",
-    "destination": "/home/bitcraze/{{user `pycharmFile`}}"
-  },
-  {
-    "type": "file",
     "source": "{{user `contentDir`}}/{{user `eclipseFile`}}",
     "destination": "/home/bitcraze/{{user `eclipseFile`}}"
   },

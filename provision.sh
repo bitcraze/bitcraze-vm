@@ -87,14 +87,6 @@ mv gcc-arm-none-eabi-*/ ~/bin/gcc-arm-none-eabi
 echo "\nPATH=\$PATH:$HOME/bin/gcc-arm-none-eabi/bin" >> ~/.profile
 rm gcc-arm-none-eabi-*.tar.bz2
 
-if [ $ENABLE_PYCHARM -eq 1 ]; then
-  # Extract PyCharm
-  tar xf pycharm-community-*.tar.gz -C /opt/
-  mv /opt/pycharm-community-* /opt/pycharm-community
-  echo "\nPATH=\$PATH:/opt/pycharm-community/bin" >> ~/.profile
-fi
-rm pycharm-community-*.tar.gz
-
 # Extract Eclipse
 tar xf eclipse-cpp-mars-1-linux-gtk.tar.gz -C /opt
 echo "\nPATH=\$PATH:/opt/eclipse" >> ~/.profile

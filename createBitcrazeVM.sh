@@ -11,9 +11,6 @@ PACKER_FILE2=bitcrazeVM_xubuntu-14.04.4-desktop_provisionVM.json
 GCC_ARM_FILE="gcc-arm-none-eabi-4_9-2014q4-20141203-linux.tar.bz2"
 GCC_ARM_URL="https://launchpad.net/gcc-arm-embedded/4.9/4.9-2014-q4-major/+download/$GCC_ARM_FILE"
 
-PYCHARM_FILE="pycharm-community-2016.1.4.tar.gz"
-PYCHARM_URL="https://download.jetbrains.com/python/$PYCHARM_FILE"
-
 ECLIPSE_FILE="eclipse-cpp-mars-1-linux-gtk.tar.gz"
 ECLIPSE_URL="http://saimei.acc.umu.se/mirror/eclipse.org/technology/epp/downloads/release/mars/1/$ECLIPSE_FILE"
 
