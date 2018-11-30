@@ -1,18 +1,15 @@
 #!/bin/bash
-ISO_FILE="xubuntu-14.04.4-desktop-i386.iso"
-ISO_URL="http://se.archive.ubuntu.com/mirror/cdimage.ubuntu.com/xubuntu/releases/14.04/release/$ISO_FILE"
 
-PACKER_FILE="bitcrazeVM_xubuntu-14.04.4-desktop.json"
 PACKER_URL="https://releases.hashicorp.com/packer/0.8.6/packer_0.8.6_linux_386.zip"
 
-PACKER_FILE1=bitcrazeVM_xubuntu-14.04.4-desktop_createVM.json
-PACKER_FILE2=bitcrazeVM_xubuntu-14.04.4-desktop_provisionVM.json
+PACKER_FILE1=bitcrazeVM_createVM.json
+PACKER_FILE2=bitcrazeVM_provisionVM.json
 
-GCC_ARM_FILE="gcc-arm-none-eabi-4_9-2014q4-20141203-linux.tar.bz2"
-GCC_ARM_URL="https://launchpad.net/gcc-arm-embedded/4.9/4.9-2014-q4-major/+download/$GCC_ARM_FILE"
+GCC_ARM_FILE="gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2"
+GCC_ARM_URL="https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2018q2/$GCC_ARM_FILE"
 
-ECLIPSE_FILE="eclipse-cpp-mars-1-linux-gtk.tar.gz"
-ECLIPSE_URL="http://saimei.acc.umu.se/mirror/eclipse.org/technology/epp/downloads/release/mars/1/$ECLIPSE_FILE"
+ECLIPSE_FILE="eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz"
+ECLIPSE_URL="http://ftp.halifax.rwth-aachen.de/eclipse//technology/epp/downloads/release/2018-09/R/$ECLIPSE_FILE"
 
 ECLIPSE_GNU_ARM_PLUGIN_FILE="ilg.gnuarmeclipse.repository-2.12.1-201604190915.zip"
 ECLIPSE_GNU_ARM_PLUGIN_URL="https://github.com/gnuarmeclipse/plug-ins/releases/download/v2.12.1-201604190915/$ECLIPSE_GNU_ARM_PLUGIN_FILE"
@@ -52,16 +49,6 @@ then
 else
   echo "$CONTENT_DIR$GCC_ARM_FILE not found. Starting download..."
   wget -P $CONTENT_DIR $GCC_ARM_URL
-fi
-
-
-#Download Pycharm (130MB) (only if it's not already downloaded)
-if [ -f "$CONTENT_DIR$PYCHARM_FILE" ]
-then
-  echo "$CONTENT_DIR$PYCHARM_FILE found. Continuing..."
-else
-  echo "$CONTENT_DIR$PYCHARM_FILE not found. Starting download..."
-  wget -P $CONTENT_DIR $PYCHARM_URL
 fi
 
 #Download Eclipse (182MB) (only if it's not already downloaded)

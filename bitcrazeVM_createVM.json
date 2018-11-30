@@ -7,7 +7,7 @@
   "builders": [{
       "type": "virtualbox-iso",
       "vm_name": "{{user `vm-name`}}",
-      "guest_os_type": "Ubuntu",
+      "guest_os_type": "Ubuntu_64",
       "format": "ova",
       "guest_additions_mode": "disable",
       "disk_size": "30000",
@@ -18,8 +18,8 @@
 	["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
       ],
 
-      "iso_url": "xubuntu-14.04.4-desktop-i386.iso",
-      "iso_checksum": "2138d30d5978092b4c054ed623d54fdb",
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_checksum": "8388f7232b400bdc80279668847f90da",
       "iso_checksum_type": "md5",
 
       "ssh_password": "{{user `password`}}",
@@ -27,10 +27,9 @@
       "ssh_wait_timeout": "10000s",
 
       "boot_command": [
-        "<enter><enter><esc><enter> <wait>",
-        "/casper/vmlinuz url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-        "hostname={{ .Name }} ",
-        "initrd=/casper/initrd.lz boot=casper automatic-ubiquity noprompt --<enter><wait>"
+        "<esc><wait>",
+        "install auto=true priority=critical url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "<enter><wait>"
       ],
       "boot_wait": "4s",
       "http_directory": "http",

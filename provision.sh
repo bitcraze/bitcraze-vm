@@ -1,24 +1,16 @@
 #!/bin/bash -x
-sh -c 'echo deb http://luke.campagnola.me/debian dev/ > /etc/apt/sources.list.d/pyqtgraph.list'
 # Add KiCad stable PPA
-add-apt-repository --yes ppa:js-reynaud/kicad-4
+add-apt-repository --yes ppa:js-reynaud/kicad-5
 
 # Update keys and repos
 apt-key update
 apt-get update
 
 #apt-get -y upgrade
-apt-get -y install build-essential git gitg sdcc python2.7 python-pip python-usb python-qt4 python3-pyqt5 python3-numpy qt4-designer kicad libsdl2-dev openjdk-7-jdk meld leafpad dfu-util || { echo 'apt-get install failed' ; exit 1; }
-#apt-get python-pyqtgraph	#The following packages cannot be authenticated!
-pip -y install pysdl2
+apt-get -y install build-essential git gitg sdcc firefox python3-dev python3-pip python3-zmq python3-usb python3-pyqt5 python3-numpy qt4-designer kicad libsdl2-dev openjdk-11-jdk meld leafpad dfu-util openocd || { echo 'apt-get install failed' ; exit 1; }
 
-# Works only on Ubuntu 15.04+
-apt-get -y install python3 python3-usb python3-pyqt4 python3-pyqtgraph python3-zmq
-
-# Necessary on Ubuntu 14.04
-apt-get -y install python3 python3-pip python3-pyqt4 python3-zmq || { echo 'apt-get install failed' ; exit 1; }
-pip3 install pyusb==1.0.0b2
-pip3 install pyqtgraph
+# To run 32bit programs
+apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
 
 # Installing VirtualBox GuestAdditions
 VBOX_ISO=VBoxGuestAdditions.iso
@@ -27,17 +19,6 @@ mount -o loop ~/$VBOX_ISO /tmp/isomount
 sh /tmp/isomount/VBoxLinuxAdditions.run
 umount /tmp/isomount
 rm -rf isomount ~/$VBOX_ISO
-
-if [ $ENABLE_ROS -eq 1 ]; then
-  # Install ROS
-  echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
-  apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116
-  apt-get update
-  apt-get -y install ros-indigo-desktop-full libusb-1.0-0-dev
-  rosdep init
-  rosdep update
-  echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
-fi
 
 # Adding udev rules for Crazyradio and Crazyflie
 usermod -a -G plugdev $USER
@@ -63,23 +44,6 @@ cd ~/
 chown bitcraze:bitcraze -R projects
 ln -s ~/projects ~/Desktop/projects
 
-if [ $ENABLE_ROS -eq 1 ]; then
-  # Create a ROS workspace with the Loco Positioning projects
-  mkdir -p ~/catkin_ws/src
-  cd ~/catkin_ws/src
-  catkin_init_workspace
-  git clone git://github.com/bitcraze/lps-ros.git
-  git clone git://github.com/whoenig/crazyflie_ros
-  cd ~/catkin_ws
-  catkin_make
-  cd ~/
-  chown bitcraze:bitcraze -R ~/catkin_ws
-  chown -R bitcraze:bitcraze ~/.ros
-  ln -s ~/catkin_ws ~/Desktop/catkin_ws
-  echo 'echo -e "Setting up \e[1m\e[32m~/catkin_ws\e[0m ROS workspace."' >> ~/.bashrc
-  echo 'source $HOME/catkin_ws/devel/setup.sh' >> ~/.bashrc
-fi
-
 # Setup gcc-arm-none-eabi toolchain
 tar --strip-components=1 -xjf gcc-arm-none-eabi-*.tar.bz2
 mkdir -p ~/bin/gcc-arm-none-eabi
@@ -88,19 +52,19 @@ echo "\nPATH=\$PATH:$HOME/bin/gcc-arm-none-eabi/bin" >> ~/.profile
 rm gcc-arm-none-eabi-*.tar.bz2
 
 # Extract Eclipse
-tar xf eclipse-cpp-mars-1-linux-gtk.tar.gz -C /opt
+tar xf eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz -C /opt
 echo "\nPATH=\$PATH:/opt/eclipse" >> ~/.profile
-rm eclipse-cpp-mars-1-linux-gtk.tar.gz
+rm eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz
 
 # Extract OpenOCD and copy udev rules
-mkdir -p /opt/gnuarmeclipse
-tar xf gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz -C /opt/gnuarmeclipse
-echo "\nPATH=\$PATH:/opt/gnuarmeclipse/openocd/0.9.0-201505190955/bin" >> ~/.profile
-rm gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz
-cp /opt/gnuarmeclipse/openocd/0.9.0-201505190955/contrib/99-openocd.rules /etc/udev/rules.d/
+# mkdir -p /opt/gnuarmeclipse
+# tar xf gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz -C /opt/gnuarmeclipse
+# echo "\nPATH=\$PATH:/opt/gnuarmeclipse/openocd/0.9.0-201505190955/bin" >> ~/.profile
+# rm gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz
+# cp /opt/gnuarmeclipse/openocd/0.9.0-201505190955/contrib/99-openocd.rules /etc/udev/rules.d/
 
 # Link scripts from openocd to config directory
-ln -s /opt/gnuarmeclipse/openocd/0.9.0-201505190955/scripts ~/.openocd
+# ln -s /opt/gnuarmeclipse/openocd/0.9.0-201505190955/scripts ~/.openocd
 
 #Extract eclipse project folders
 tar xf eclipse-project-files.tar.gz -C ~/
