@@ -6,10 +6,12 @@ add-apt-repository --yes ppa:js-reynaud/kicad-5
 apt-key update
 apt-get update
 
-#apt-get -y upgrade
-apt-get -y install build-essential git gitg sdcc firefox python3-dev python3-pip python3-zmq python3-usb python3-pyqt5 python3-numpy qt4-designer kicad libsdl2-dev openjdk-11-jdk meld leafpad dfu-util openocd || { echo 'apt-get install failed' ; exit 1; }
+# Install packages
+apt-get -y install build-essential git gitg sdcc firefox python3-dev python3-pip python3-zmq python3-usb\
+                   python3-pyqt5 python3-pyqt5.qtsvg python3-numpy qt4-designer kicad libsdl2-dev openjdk-11-jdk\
+                   meld leafpad dfu-util openocd || { echo 'apt-get install failed' ; exit 1; }
 
-# To run 32bit programs
+# Libs to run 32bit programs
 apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
 
 # Installing VirtualBox GuestAdditions
