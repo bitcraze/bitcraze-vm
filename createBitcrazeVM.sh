@@ -21,15 +21,6 @@ CONTENT_DIR="contentForVM/"
 
 OVA_FILE=BitcrazeVM.ova
 
-#Download ISO image (only if it's not already downloaded)
-if [ -f "$ISO_FILE" ]
-then
-  echo "$ISO_FILE found. Continuing..."
-else
-  echo "$ISO_FILE not found. Starting download..."
-  wget $ISO_URL
-fi
-
 #Install packer (only if it's not already installed)
 if type "packer" > /dev/null
 then
