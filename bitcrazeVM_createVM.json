@@ -14,12 +14,12 @@
       "hard_drive_interface": "sata",
 
       "vboxmanage": [
-	["modifyvm", "{{.Name}}", "--memory", "1024", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbehci", "on", "--nestedpaging", "off"],
+	["modifyvm", "{{.Name}}", "--memory", "1024", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbohci", "on", "--nestedpaging", "off"],
 	["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
       ],
 
-      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/current/images/netboot/mini.iso",
-      "iso_checksum": "8388f7232b400bdc80279668847f90da",
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/mini.iso",
+      "iso_checksum": "e5bf713621b43207dead707396da29f6",
       "iso_checksum_type": "md5",
 
       "ssh_password": "{{user `password`}}",
