@@ -10,18 +10,16 @@ do
 		git pull
 		git submodule init
 		git submodule update --recursive
-		cd ..
-	fi
-done
 
-for f in /home/bitcraze/catkin_ws/src/*
-do
-	if [ -d "$f" ]; then
-		echo "Updating $f"
-		cd $f
-		git pull
-		git submodule init
-		git submodule update --recursive
+		#
+		# In order to make sure the user has an up-to-date install of the
+		# python lib and client, with all deps, we make sure to re-install it
+		# from the source in git.
+		#
+		if [ -f setup.py ]; then  # true if this is a python project
+			pip3 install --user --upgrade --force-reinstall -e .
+		fi
+
 		cd ..
 	fi
 done
