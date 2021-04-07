@@ -8,11 +8,8 @@ apt-get update
 
 # Install packages
 apt-get -y install build-essential git gitg sdcc firefox python3-dev python3-pip python3-zmq python3-usb\
-                   python3-pyqt5 python3-pyqt5.qtsvg python3-numpy qt4-designer kicad libsdl2-dev openjdk-11-jdk\
-                   meld leafpad dfu-util openocd || { echo 'apt-get install failed' ; exit 1; }
-
-# Libs to run 32bit programs
-apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1
+                   python3-pyqt5 python3-pyqt5.qtsvg python3-numpy qtcreator kicad libsdl2-dev openjdk-11-jdk\
+                   meld dfu-util openocd gcc-arm-none-eabi || { echo 'apt-get install failed' ; exit 1; }
 
 # Installing VirtualBox GuestAdditions
 VBOX_ISO=VBoxGuestAdditions.iso
@@ -46,27 +43,10 @@ cd ~/
 chown bitcraze:bitcraze -R projects
 ln -s ~/projects ~/Desktop/projects
 
-# Setup gcc-arm-none-eabi toolchain
-tar --strip-components=1 -xjf gcc-arm-none-eabi-*.tar.bz2
-mkdir -p ~/bin/gcc-arm-none-eabi
-mv gcc-arm-none-eabi-*/ ~/bin/gcc-arm-none-eabi
-echo "\nPATH=\$PATH:$HOME/bin/gcc-arm-none-eabi/bin" >> ~/.profile
-rm gcc-arm-none-eabi-*.tar.bz2
-
 # Extract Eclipse
 tar xf eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz -C /opt
 echo "\nPATH=\$PATH:/opt/eclipse" >> ~/.profile
 rm eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz
-
-# Extract OpenOCD and copy udev rules
-# mkdir -p /opt/gnuarmeclipse
-# tar xf gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz -C /opt/gnuarmeclipse
-# echo "\nPATH=\$PATH:/opt/gnuarmeclipse/openocd/0.9.0-201505190955/bin" >> ~/.profile
-# rm gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz
-# cp /opt/gnuarmeclipse/openocd/0.9.0-201505190955/contrib/99-openocd.rules /etc/udev/rules.d/
-
-# Link scripts from openocd to config directory
-# ln -s /opt/gnuarmeclipse/openocd/0.9.0-201505190955/scripts ~/.openocd
 
 #Extract eclipse project folders
 tar xf eclipse-project-files.tar.gz -C ~/
