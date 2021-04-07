@@ -3,12 +3,7 @@
       "user"	: 	    "bitcraze",
       "password"  : 	"crazyflie",
       "vm-name": 	    "BitcrazeVM",
-      "contentDir":	    "contentForVM",
-      "gccFile": 	    "gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2",
-      "pycharmFile": 	"pycharm-community-2016.1.4.tar.gz",
-      "eclipseFile":	"eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz",
-      "eclipsePrj":	    "eclipse-project-files.tar.gz",
-      "openocd":        "gnuarmeclipse-openocd-debian32-0.9.0-201505190955.tgz"
+      "contentDir":	    "contentForVM"
   },
   "builders": [{
     "type": "virtualbox-ovf",
@@ -17,7 +12,7 @@
     "format": "ova",
 
     "vboxmanage": [
-      ["modifyvm", "{{.Name}}", "--memory", "1024", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbxhci", "on", "--nestedpaging", "off"],
+      ["modifyvm", "{{.Name}}", "--cpus", "2", "--memory", "2048", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbxhci", "on", "--nestedpaging", "off"],
       ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
     ],
     "import_opts": "importtovdi",

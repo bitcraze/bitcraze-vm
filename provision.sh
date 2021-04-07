@@ -1,15 +1,14 @@
 #!/bin/bash -x
 # Add KiCad stable PPA
-add-apt-repository --yes ppa:js-reynaud/kicad-5
+sudo add-apt-repository --yes ppa:kicad/kicad-5.1-releases
 
 # Update keys and repos
 apt-key update
 apt-get update
 
 # Install packages
-apt-get -y install build-essential git gitg sdcc firefox python3-dev python3-pip python3-zmq python3-usb\
-                   python3-pyqt5 python3-pyqt5.qtsvg python3-numpy qtcreator kicad libsdl2-dev openjdk-11-jdk\
-                   meld dfu-util openocd gcc-arm-none-eabi || { echo 'apt-get install failed' ; exit 1; }
+apt-get -y install build-essential git sdcc firefox python3-dev python3-pip qtcreator kicad \
+                   dfu-util openocd gcc-arm-none-eabi || { echo 'apt-get install failed' ; exit 1; }
 
 # Installing VirtualBox GuestAdditions
 VBOX_ISO=VBoxGuestAdditions.iso
@@ -43,18 +42,21 @@ cd ~/
 chown bitcraze:bitcraze -R projects
 ln -s ~/projects ~/Desktop/projects
 
-# Extract Eclipse
-tar xf eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz -C /opt
-echo "\nPATH=\$PATH:/opt/eclipse" >> ~/.profile
-rm eclipse-cpp-2018-09-linux-gtk-x86_64.tar.gz
+# Install VSCode
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
 
-#Extract eclipse project folders
-tar xf eclipse-project-files.tar.gz -C ~/
-rm eclipse-project-files.tar.gz
+apt install apt-transport-https
+apt update
+apt install code # or code-insiders
 
-#Install GNU ARM Eclipse plugin
-/opt/eclipse/eclipse -clean -consolelog -nosplash -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars,http://gnuarmeclipse.sourceforge.net/updates -installIU ilg.gnuarmeclipse.debug.gdbjtag.openocd,ilg.gnuarmeclipse.debug.gdbjtag.jlink,ilg.gnuarmeclipse.debug.gdbjtag.qemu -tag AddGnuArm -destination /opt/eclipse/ -profile epp.package.cpp
-chown bitcraze:bitcraze -R .eclipse
+# Install VSCode extensions
+sudo -H -u bitcraze code --install-exteman nsion ms-python.python
+sudo -H -u bitcraze code --install-extension ms-python.vscode-pylance
+sudo -H -u bitcraze code --install-extension ms-vscode.cpptools
+sudo -H -u bitcraze code --install-extension seanwu.vscode-qt-for-python
 
 # Setup update_all_projects script
 chmod +x ~/update_all_projects.sh
@@ -77,11 +79,6 @@ sudo -H -u bitcraze bash -c 'pip3 install --user -e ~/projects/crazyflie-clients
 
 # Disable screen saver (workaround)
 mv /etc/xdg/autostart/light-locker.desktop /etc/xdg/autostart/light-locker.desktop.old
-
-# Workaround for autosave error in Eclipse
-mkdir -p ~/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/
-touch ~/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.markers
-chown bitcraze:bitcraze -R ~/workspace
 
 # Clean up VM
 apt-get -y autoremove
