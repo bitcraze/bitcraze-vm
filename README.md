@@ -22,7 +22,8 @@ Here is a non-exhaustive list of what's included:
 ## Pre-requisites
 
 * This script has only been tested on a Linux machine, therefore it's recommended to use Linux to build the Bitcraze VM
-* VirtualBox must be installed
+* VirtualBox must be installed as well as the VirtualBox Extension Pack
+* [Packer](https://www.packer.io)  (can be installed with `apt install packer`)
 
 ## Local build
 
@@ -51,13 +52,6 @@ This saves a lot of time.
 #### bitcrazeVM_provisionVM.json
 Copy the files specified in the JSON template to the VM and run the `provision.sh` script so setup the image.
 
-### What needs to be done after the VM has been created and provisioned?
-
-Some steps still have to be done manually:
-
-1. Import the generated OVA file (e.g. ```output-virtualbox-ovf/BitcrazeVM.ova```) into VirtualBox (File -> Import appliance...)
-2. Start the Bitcraze VM
-
 ### Help! Something does not work.
 
 Please take a look at the log files ```packerlog_create.txt``` and ```packerlog_provision.txt```.
@@ -71,10 +65,11 @@ The Bitcraze VM can either be downloaded via torrent or via direct download.
 
 Installing
 ----------
-The virtual appliance can be imported into the virtual machine manager of your choice:
+The virtual appliance can be imported into [VirtualBox](https://www.virtualbox.org/ "VirtualBox").
 
-* [VirtualBox](https://www.virtualbox.org/ "VirtualBox")
+It can be used with oter virtual machine manager however setting up the guest addition might be required. The following have been tested 
 
+* [Gnome Boxes](https://wiki.gnome.org/Apps/Boxes)
 * [VM Player](http://www.vmware.com/products/player/ "WM Player")
 
 Using the virtual machine
