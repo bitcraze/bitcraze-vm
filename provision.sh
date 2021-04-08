@@ -8,7 +8,10 @@ apt-get update
 
 # Install packages
 apt-get -y install build-essential git sdcc firefox python3-dev python3-pip qtcreator kicad \
-                   dfu-util openocd gcc-arm-none-eabi || { echo 'apt-get install failed' ; exit 1; }
+                   dfu-util openocd gcc-arm-none-eabi gdb-multiarch || { echo 'apt-get install failed' ; exit 1; }
+
+# Required for the VSCode embedded debug to work
+ln -s /usr/bin/gdb-multiarch /usr/local/bin/arm-none-eabi-gdb
 
 # Installing VirtualBox GuestAdditions
 VBOX_ISO=VBoxGuestAdditions.iso
@@ -57,6 +60,7 @@ sudo -H -u bitcraze code --install-exteman nsion ms-python.python
 sudo -H -u bitcraze code --install-extension ms-python.vscode-pylance
 sudo -H -u bitcraze code --install-extension ms-vscode.cpptools
 sudo -H -u bitcraze code --install-extension seanwu.vscode-qt-for-python
+sudo -H -u bitcraze code --install-extension marus25.cortex-debug
 
 # Setup update_all_projects script
 chmod +x ~/update_all_projects.sh
