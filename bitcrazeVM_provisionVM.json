@@ -33,7 +33,9 @@
           "--usbxhci",
           "on",
           "--nestedpaging",
-          "off"
+          "off",
+          "--graphicscontroller",
+          "vmsvga"
         ],
         [
           "storageattach",
