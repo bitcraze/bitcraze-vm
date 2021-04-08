@@ -1,70 +1,104 @@
 {
-  "variables" : {
-      "user"	: 	    "bitcraze",
-      "password"  : 	"crazyflie",
-      "vm-name": 	    "BitcrazeVM",
-      "contentDir":	    "contentForVM"
-  },
-  "builders": [{
-    "type": "virtualbox-ovf",
-    "vm_name": "{{user `vm-name`}}",
-    "source_path": "output-virtualbox-iso/{{user `vm-name`}}.ova",
-    "format": "ova",
-
-    "vboxmanage": [
-      ["modifyvm", "{{.Name}}", "--cpus", "2", "--memory", "2048", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbxhci", "on", "--nestedpaging", "off"],
-      ["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
-    ],
-    "import_opts": "importtovdi",
-
-    "ssh_username": "{{user `user`}}",
-    "ssh_password": "{{user `password`}}",
-    "ssh_wait_timeout": "10000s",
-
-    "boot_wait": "30s",
-
-    "virtualbox_version_file": ".vbox_version",
-
-    "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now"
-  }],
-  "provisioners": [{
-    "type": "file",
-    "source": "{{user `contentDir`}}/update_all_projects.sh",
-    "destination": "/home/bitcraze/update_all_projects.sh"
-  },
-  {
-    "type": "file",
-    "source": "{{user `contentDir`}}/desktop/",
-    "destination": "/home/bitcraze/Desktop"
-  },
-  {
-    "type": "file",
-    "source": "{{user `contentDir`}}/pictures/",
-    "destination": "/home/bitcraze/Pictures"
-  },
-  {
-    "type": "file",
-    "source": "{{user `contentDir`}}/{{user `gccFile`}}",
-    "destination": "/home/bitcraze/{{user `gccFile`}}"
-  },
-  {
-    "type": "file",
-    "source": "{{user `contentDir`}}/{{user `eclipseFile`}}",
-    "destination": "/home/bitcraze/{{user `eclipseFile`}}"
-  },
-  {
-    "type": "file",
-    "source": "{{user `contentDir`}}/{{user `eclipsePrj`}}",
-    "destination": "/home/bitcraze/{{user `eclipsePrj`}}"
-  },
-  {
-    "type": "file",
-    "source": "{{user `contentDir`}}/{{user `openocd`}}",
-    "destination": "/home/bitcraze/{{user `openocd`}}"
-  },
-  {
-    "type": "shell",
-    "script": "provision.sh",
-    "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
-  }]
+  "builders": [
+    {
+      "boot_wait": "30s",
+      "format": "ova",
+      "import_opts": "importtovdi",
+      "shutdown_command": "echo '{{user `password`}}' | sudo -S shutdown -P now",
+      "source_path": "output-virtualbox-iso/{{user `vm-name`}}.ova",
+      "ssh_password": "{{user `password`}}",
+      "ssh_timeout": "10000s",
+      "ssh_username": "{{user `user`}}",
+      "type": "virtualbox-ovf",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2",
+          "--memory",
+          "2048",
+          "--vram",
+          "16",
+          "--mouse",
+          "usbtablet",
+          "--rtcuseutc",
+          "on",
+          "--audio",
+          "pulse",
+          "--audiocodec",
+          "ad1980",
+          "--usb",
+          "on",
+          "--usbxhci",
+          "on",
+          "--nestedpaging",
+          "off"
+        ],
+        [
+          "storageattach",
+          "{{.Name}}",
+          "--storagectl",
+          "SATA Controller",
+          "--port",
+          "0",
+          "--nonrotational",
+          "on",
+          "--discard",
+          "on"
+        ]
+      ],
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "{{user `vm-name`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "destination": "/home/bitcraze/update_all_projects.sh",
+      "source": "{{user `contentDir`}}/update_all_projects.sh",
+      "type": "file"
+    },
+    {
+      "destination": "/home/bitcraze/Desktop",
+      "source": "{{user `contentDir`}}/desktop/",
+      "type": "file"
+    },
+    {
+      "destination": "/home/bitcraze/Pictures",
+      "source": "{{user `contentDir`}}/pictures/",
+      "type": "file"
+    },
+    {
+      "destination": "/home/bitcraze/{{user `gccFile`}}",
+      "source": "{{user `contentDir`}}/{{user `gccFile`}}",
+      "type": "file"
+    },
+    {
+      "destination": "/home/bitcraze/{{user `eclipseFile`}}",
+      "source": "{{user `contentDir`}}/{{user `eclipseFile`}}",
+      "type": "file"
+    },
+    {
+      "destination": "/home/bitcraze/{{user `eclipsePrj`}}",
+      "source": "{{user `contentDir`}}/{{user `eclipsePrj`}}",
+      "type": "file"
+    },
+    {
+      "destination": "/home/bitcraze/{{user `openocd`}}",
+      "source": "{{user `contentDir`}}/{{user `openocd`}}",
+      "type": "file"
+    },
+    {
+      "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "script": "provision.sh",
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "contentDir": "contentForVM",
+    "password": "crazyflie",
+    "user": "bitcraze",
+    "vm-name": "BitcrazeVM"
+  }
 }
+

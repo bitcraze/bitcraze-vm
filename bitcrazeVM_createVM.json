@@ -1,43 +1,75 @@
 {
-  "variables" : {
-      "user"	: 	"bitcraze",
-      "password"  : 	"crazyflie",
-      "vm-name": 	"BitcrazeVM"
-  },
-  "builders": [{
-      "type": "virtualbox-iso",
-      "vm_name": "{{user `vm-name`}}",
-      "guest_os_type": "Ubuntu_64",
-      "format": "ova",
-      "guest_additions_mode": "disable",
-      "disk_size": "30000",
-      "hard_drive_interface": "sata",
-
-      "vboxmanage": [
-	["modifyvm", "{{.Name}}", "--memory", "1024", "--vram", "16", "--mouse", "usbtablet", "--rtcuseutc", "on", "--audio", "pulse", "--audiocodec", "ad1980", "--usb", "on", "--usbohci", "on", "--nestedpaging", "off"],
-	["storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "0", "--nonrotational", "on", "--discard", "on"]
-      ],
-
-      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/mini.iso",
-      "iso_checksum": "e5bf713621b43207dead707396da29f6",
-      "iso_checksum_type": "md5",
-
-      "ssh_password": "{{user `password`}}",
-      "ssh_username": "{{user `user`}}",
-      "ssh_wait_timeout": "10000s",
-
+  "builders": [
+    {
       "boot_command": [
         "<esc><wait>",
         "install auto=true priority=critical url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
         "<enter><wait>"
       ],
       "boot_wait": "4s",
+      "disk_size": "30000",
+      "format": "ova",
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Ubuntu_64",
+      "hard_drive_interface": "sata",
       "http_directory": "http",
+      "iso_checksum": "md5:e5bf713621b43207dead707396da29f6",
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/mini.iso",
       "shutdown_command": "echo {{user `password`}} | sudo -S shutdown -P now",
-
+      "ssh_password": "{{user `password`}}",
+      "ssh_timeout": "10000s",
+      "ssh_username": "{{user `user`}}",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "1024",
+          "--vram",
+          "16",
+          "--mouse",
+          "usbtablet",
+          "--rtcuseutc",
+          "on",
+          "--audio",
+          "pulse",
+          "--audiocodec",
+          "ad1980",
+          "--usb",
+          "on",
+          "--usbohci",
+          "on",
+          "--nestedpaging",
+          "off"
+        ],
+        [
+          "storageattach",
+          "{{.Name}}",
+          "--storagectl",
+          "SATA Controller",
+          "--port",
+          "0",
+          "--nonrotational",
+          "on",
+          "--discard",
+          "on"
+        ]
+      ],
       "vboxmanage_post": [
-	["modifyhd", "output-virtualbox-iso/{{.Name}}.vdi", "--compact"]
-      ]
+        [
+          "modifyhd",
+          "output-virtualbox-iso/{{.Name}}.vdi",
+          "--compact"
+        ]
+      ],
+      "vm_name": "{{user `vm-name`}}"
     }
-  ]
+  ],
+  "variables": {
+    "password": "crazyflie",
+    "user": "bitcraze",
+    "vm-name": "BitcrazeVM"
+  }
 }
+
