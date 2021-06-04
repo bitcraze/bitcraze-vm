@@ -94,6 +94,11 @@
       "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
       "script": "provision.sh",
       "type": "shell"
+    },
+    {
+      "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "script": "provision_sim_cf.sh",
+      "type": "shell"
     }
   ],
   "variables": {
