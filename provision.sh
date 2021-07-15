@@ -8,7 +8,7 @@ apt-get update
 
 # Install packages
 apt-get -y install build-essential git sdcc firefox python3-dev python3-pip qtcreator kicad \
-                   dfu-util openocd gcc-arm-none-eabi gdb-multiarch || { echo 'apt-get install failed' ; exit 1; }
+                   dfu-util openocd gcc-arm-none-eabi gdb-multiarch docker.io || { echo 'apt-get install failed' ; exit 1; }
 
 # Required for the VSCode embedded debug to work
 ln -s /usr/bin/gdb-multiarch /usr/local/bin/arm-none-eabi-gdb
@@ -22,13 +22,16 @@ umount /tmp/isomount
 rm -rf isomount ~/$VBOX_ISO
 
 # Adding udev rules for Crazyradio and Crazyflie
-usermod -a -G plugdev $USER
+usermod -a -G plugdev bitcraze
 sh -c 'echo SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"1915\", ATTRS{idProduct}==\"7777\", MODE=\"0664\", GROUP=\"plugdev\" > /etc/udev/rules.d/99-crazyradio.rules'
 sh -c 'echo SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"1915\", ATTRS{idProduct}==\"0101\", MODE=\"0664\", GROUP=\"plugdev\" >> /etc/udev/rules.d/99-crazyradio.rules'
 sh -c 'echo SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0483\", ATTRS{idProduct}==\"5740\", MODE=\"0664\", GROUP=\"plugdev\" >> /etc/udev/rules.d/99-crazyflie.rules'
 
 # Add user to dialout group, to give access to serial ports
-usermod -a -G dialout $USER
+usermod -a -G dialout bitcraze
+
+# Add user to docker group
+usermod -a -G docker bitcraze
 
 # Clone the git repos
 mkdir ~/projects
@@ -78,7 +81,7 @@ cp /usr/share/xfce4/backdrops/xubuntu-wallpaper.png /usr/share/xfce4/backdrops/x
 cp ~/Pictures/vm_background.png /usr/share/xfce4/backdrops/xubuntu-wallpaper.png
 
 # Add user to vboxsf group so shares with host can be used
-usermod -a -G vboxsf $USER
+usermod -a -G vboxsf bitcraze
 
 # Set up crazyflie-clients-python to use crazyflie-lib-python from source
 sudo -H -u bitcraze bash -c 'pip3 install --user -e ~/projects/crazyflie-lib-python'
