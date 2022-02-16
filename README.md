@@ -81,3 +81,6 @@ Pass: crazyflie
 ```
 
 For more information on debugging, building, flashing and updating to the latest version have a look at our [Documentation](https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/#inst-comp "Getting started with the Crazyflie 2.X")
+
+## Contribute
+Go to the [contribute page](https://www.bitcraze.io/contribute/) on our website to learn more.
