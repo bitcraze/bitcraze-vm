@@ -23,6 +23,7 @@ Here is a non-exhaustive list of what's included:
 
 * This script has only been tested on a Linux machine, therefore it's recommended to use Linux to build the Bitcraze VM
 * VirtualBox must be installed as well as the VirtualBox Extension Pack
+* Virtual box guest additions
 * [Packer](https://www.packer.io)  (can be installed with `apt install packer`)
 
 ## Local build
