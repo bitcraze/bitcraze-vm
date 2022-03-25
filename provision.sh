@@ -36,17 +36,17 @@ usermod -a -G docker bitcraze
 # Clone the git repos
 mkdir ~/projects
 cd ~/projects
-git clone git://github.com/bitcraze/crazyflie-clients-python.git
-git clone git://github.com/bitcraze/crazyflie-lib-python.git
-git clone git://github.com/bitcraze/crazyflie-firmware.git --recursive
-git clone git://github.com/bitcraze/crazyflie-bootloader.git
-git clone git://github.com/bitcraze/crazyradio-firmware.git
-git clone git://github.com/bitcraze/crazyflie-android-client.git
-git clone git://github.com/bitcraze/crazyflie2-exp-template-electronics.git
-git clone git://github.com/bitcraze/crazyflie2-stm-bootloader.git
-git clone git://github.com/bitcraze/crazyflie2-nrf-bootloader.git
-git clone git://github.com/bitcraze/crazyflie2-nrf-firmware.git
-git clone git://github.com/bitcraze/lps-node-firmware.git --recursive
+git clone https://github.com/bitcraze/crazyflie-clients-python.git
+git clone https://github.com/bitcraze/crazyflie-lib-python.git
+git clone https://github.com/bitcraze/crazyflie-firmware.git --recursive
+git clone https://github.com/bitcraze/crazyflie-bootloader.git
+git clone https://github.com/bitcraze/crazyradio-firmware.git
+git clone https://github.com/bitcraze/crazyflie-android-client.git
+git clone https://github.com/bitcraze/crazyflie2-exp-template-electronics.git
+git clone https://github.com/bitcraze/crazyflie2-stm-bootloader.git
+git clone https://github.com/bitcraze/crazyflie2-nrf-bootloader.git
+git clone https://github.com/bitcraze/crazyflie2-nrf-firmware.git
+git clone https://github.com/bitcraze/lps-node-firmware.git --recursive
 cd ~/
 chown bitcraze:bitcraze -R projects
 ln -s ~/projects ~/Desktop/projects
