@@ -17,6 +17,37 @@ Here is a non-exhaustive list of what's included:
 * vscode prepared for compiling/debugging/flashing the Crazyflie firmware
 * SDCC 3.2 for compiling of Crazyradio firmware
 
+
+Downloading
+-----------
+The Bitcraze VM can be downloaded via the [Github Release Page](https://github.com/bitcraze/bitcraze-vm/releases)
+
+Installing
+----------
+The virtual appliance can be imported into [VirtualBox](https://www.virtualbox.org/ "VirtualBox"). You will need the extention package of virtual box to be able to use the USB device. Go to [Oracles download page](https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html?msclkid=be59f68fcf9f11ec801dcf4ea944dd1d) to install both virtual box and the expansion pack.
+
+It can be used with other virtual machine manager however setting up the guest addition might be required. The following have been tested 
+
+* [Gnome Boxes](https://wiki.gnome.org/Apps/Boxes)
+* [VM Player](http://www.vmware.com/products/player/ "WM Player")
+
+Using the virtual machine
+-------------------------
+After importing just run the machine. It logs in automatically but use the following credentials if needed:
+```
+User: bitcraze
+Pass: crazyflie
+```
+
+Optimizing for Use
+-------------------------
+For faster USB connection with the Crazyradio PA it is advised to filter the USB device at startup of the VM. Go to *settings->USB*, make sure that USB 3.0 is enabled and add a USB device filter for the Crazyflie PA, which should be called 'Bitcraze Crazyradio PA USB Dongle [9955]'.
+
+Also just to be sure, install the guest addition pack from inside the VM by typing: 
+`sudo apt-get install virtualbox-guest-additions-iso`
+
+For the rest of the performance of your VM, you can try to increase the base memory (Settings/System/Motherboard), the CPU's available (Settings/System/Processor), enable hardware acceleration and select Hyper-V (Settings/System/Acceleration) or increase the video memory with 3D acceleration enabled (Settings/Display/Screen). This requires some adjusting as this could be different per system you are running the VM from.
+
 # How to build the Bitcraze VM
 
 ## Pre-requisites
@@ -57,31 +88,6 @@ Copy the files specified in the JSON template to the VM and run the `provision.s
 
 Please take a look at the log files ```packerlog_create.txt``` and ```packerlog_provision.txt```.
 
-
-Downloading
------------
-The Bitcraze VM can either be downloaded via torrent or via direct download.
-
-[Bitcraze VM download page](https://wiki.bitcraze.io/projects:virtualmachine:index)
-
-Installing
-----------
-The virtual appliance can be imported into [VirtualBox](https://www.virtualbox.org/ "VirtualBox").
-
-It can be used with oter virtual machine manager however setting up the guest addition might be required. The following have been tested 
-
-* [Gnome Boxes](https://wiki.gnome.org/Apps/Boxes)
-* [VM Player](http://www.vmware.com/products/player/ "WM Player")
-
-Using the virtual machine
--------------------------
-After importing just run the machine. It logs in automatically but use the following credentials if needed:
-```
-User: bitcraze
-Pass: crazyflie
-```
-
-For more information on debugging, building, flashing and updating to the latest version have a look at our [Documentation](https://www.bitcraze.io/documentation/tutorials/getting-started-with-crazyflie-2-x/#inst-comp "Getting started with the Crazyflie 2.X")
 
 ## Contribute
 Go to the [contribute page](https://www.bitcraze.io/contribute/) on our website to learn more.
