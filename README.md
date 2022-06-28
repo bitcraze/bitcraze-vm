@@ -39,6 +39,14 @@ User: bitcraze
 Pass: crazyflie
 ```
 
+In the virtual machine double click the **“update all projects”** icon on the desktop. This pulls down the latest source code from GitHub for all projects.
+
+install hardware
+-------------------------
+
+Insert Crazyradio PA in a USB port.
+Insert game controller in a USB port.
+
 Optimizing for Use
 -------------------------
 For faster USB connection with the Crazyradio PA it is advised to filter the USB device at startup of the VM. Go to *settings->USB*, make sure that USB 3.0 is enabled and add a USB device filter for the Crazyflie PA, which should be called 'Bitcraze Crazyradio PA USB Dongle [9955]'.
@@ -48,7 +56,7 @@ Also just to be sure, install the guest addition pack from inside the VM by typi
 
 For the rest of the performance of your VM, you can try to increase the base memory (Settings/System/Motherboard), the CPU's available (Settings/System/Processor), enable hardware acceleration and select Hyper-V (Settings/System/Acceleration) or increase the video memory with 3D acceleration enabled (Settings/Display/Screen). This requires some adjusting as this could be different per system you are running the VM from.
 
-# How to build the Bitcraze VM
+# How to build the Bitcraze VM image
 
 ## Pre-requisites
 
