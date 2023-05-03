@@ -20,6 +20,7 @@ done
 # python lib and client, with all deps, we make sure to re-install it
 # from the source in git.
 #
+pip3 install --upgrade pip
 pip3 install --user --force-reinstall -e /home/bitcraze/projects/crazyflie-lib-python
 pip3 install --user --force-reinstall -e /home/bitcraze/projects/crazyflie-clients-python
 
