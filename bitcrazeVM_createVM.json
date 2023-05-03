@@ -54,7 +54,8 @@
           "on",
           "--discard",
           "on"
-        ]
+        ],
+        ["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"]
       ],
       "vboxmanage_post": [
         [
@@ -72,4 +73,3 @@
     "vm-name": "BitcrazeVM"
   }
 }
-
