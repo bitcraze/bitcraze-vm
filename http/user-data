@@ -5,13 +5,9 @@ autoinstall:
     # Workaround for ssh timeout bug
     - 'sudo systemctl stop ssh'
   locale: en_US
-  # With keyboard settings the build fails
-  # keyboard:
-  #   layout: en
-  #   variant: us
-  # TODO packages
   packages:
     - python3-pip
+    - xubuntu-desktop
   network:
     network:
       version: 2
