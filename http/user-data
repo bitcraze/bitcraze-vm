@@ -6,7 +6,6 @@ autoinstall:
     - 'sudo systemctl stop ssh'
   locale: en_US
   packages:
-    - python3-pip
     - xubuntu-desktop
   network:
     network:
