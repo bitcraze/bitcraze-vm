@@ -26,7 +26,7 @@
       "boot_wait": "4s",
       "memory": "2048",
       "cpus": "2",
-      "disk_size": "30000",
+      "disk_size": "40000",
       "format": "ova",
       "guest_additions_mode": "disable",
       "guest_os_type": "Ubuntu_64",

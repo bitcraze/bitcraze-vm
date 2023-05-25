@@ -5,8 +5,11 @@ autoinstall:
     # Workaround for ssh timeout bug
     - 'sudo systemctl stop ssh'
   locale: en_US
+  # debconf-selections:
+  #   "gdm3    shared/default-x-display-manager select lightdm
+  #   lightdm shared/default-x-display-manager select lightdm"
   packages:
-    - xubuntu-desktop
+    - ubuntu-desktop
   network:
     network:
       version: 2

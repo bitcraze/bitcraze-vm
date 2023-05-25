@@ -58,26 +58,6 @@
       "type": "file"
     },
     {
-      "destination": "/home/bitcraze/{{user `gccFile`}}",
-      "source": "{{user `contentDir`}}/{{user `gccFile`}}",
-      "type": "file"
-    },
-    {
-      "destination": "/home/bitcraze/{{user `eclipseFile`}}",
-      "source": "{{user `contentDir`}}/{{user `eclipseFile`}}",
-      "type": "file"
-    },
-    {
-      "destination": "/home/bitcraze/{{user `eclipsePrj`}}",
-      "source": "{{user `contentDir`}}/{{user `eclipsePrj`}}",
-      "type": "file"
-    },
-    {
-      "destination": "/home/bitcraze/{{user `openocd`}}",
-      "source": "{{user `contentDir`}}/{{user `openocd`}}",
-      "type": "file"
-    },
-    {
       "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
       "script": "provision.sh",
       "type": "shell"
