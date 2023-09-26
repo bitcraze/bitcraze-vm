@@ -43,23 +43,28 @@
   ],
   "provisioners": [
     {
-      "destination": "/home/bitcraze/update_all_projects.sh",
       "source": "{{user `contentDir`}}/update_all_projects.sh",
+      "destination": "/home/bitcraze/update_all_projects.sh",
       "type": "file"
     },
     {
-      "destination": "/home/bitcraze/Desktop",
-      "source": "{{user `contentDir`}}/desktop/",
+      "source": "{{user `contentDir`}}/Desktop",
+      "destination": "/home/bitcraze",
       "type": "file"
     },
     {
-      "destination": "/home/bitcraze/Pictures",
-      "source": "{{user `contentDir`}}/pictures/",
+      "source": "{{user `contentDir`}}/Pictures",
+      "destination": "/home/bitcraze",
       "type": "file"
+    },
+    {
+      "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sh '{{ .Path }}'",
+      "script": "provision.sh",
+      "type": "shell"
     },
     {
       "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
-      "script": "provision.sh",
+      "script": "provision-sudo.sh",
       "type": "shell"
     }
   ],

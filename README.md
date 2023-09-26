@@ -7,7 +7,7 @@ The Bitcraze VM contains everything you need for running the Bitcraze projects a
 
 Here is a non-exhaustive list of what's included:
 
-* Xubuntu 20.04 pre-configured
+* Ubuntu live server 22.04 pre-configured
 * VirtualBox guest additions pre-installed
 * udev rules and pre-configured USB filtering for the Crazyradio and it's bootloader (NRF BOOT)
 * Most of our projects pre-cloned
@@ -26,7 +26,7 @@ Installing
 ----------
 The virtual appliance can be imported into [VirtualBox](https://www.virtualbox.org/ "VirtualBox"). You will need the extention package of virtual box to be able to use the USB device. Go to [Oracles download page](https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html?msclkid=be59f68fcf9f11ec801dcf4ea944dd1d) to install both virtual box and the expansion pack.
 
-It can be used with other virtual machine manager however setting up the guest addition might be required. The following have been tested 
+It can be used with other virtual machine manager however setting up the guest addition might be required. The following have been tested
 
 * [Gnome Boxes](https://wiki.gnome.org/Apps/Boxes)
 * [VM Player](http://www.vmware.com/products/player/ "WM Player")
@@ -51,7 +51,7 @@ Optimizing for Use
 -------------------------
 For faster USB connection with the Crazyradio PA it is advised to filter the USB device at startup of the VM. Go to *settings->USB*, make sure that USB 3.0 is enabled and add a USB device filter for the Crazyflie PA, which should be called 'Bitcraze Crazyradio PA USB Dongle [9955]'.
 
-Also just to be sure, install the guest addition pack from inside the VM by typing: 
+Also just to be sure, install the guest addition pack from inside the VM by typing:
 `sudo apt-get install virtualbox-guest-additions-iso`
 
 For the rest of the performance of your VM, you can try to increase the base memory (Settings/System/Motherboard), the CPU's available (Settings/System/Processor), enable hardware acceleration and select Hyper-V (Settings/System/Acceleration) or increase the video memory with 3D acceleration enabled (Settings/Display/Screen). This requires some adjusting as this could be different per system you are running the VM from.
