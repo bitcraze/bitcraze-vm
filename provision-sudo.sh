@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # Remove unused packages to keep the size down
-apt remove  \
+apt remove -y \
 thunderbird \
 transmission-gtk \
 gnome-todo \
