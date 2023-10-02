@@ -239,8 +239,9 @@ usermod -a -G vboxsf bitcraze
 sudo -H -u bitcraze bash -c 'pip3 install --user -e ~/projects/crazyflie-lib-python'
 sudo -H -u bitcraze bash -c 'pip3 install --user -e ~/projects/crazyflie-clients-python'
 
-# Clean up VM
+# Clean up VM to minimize image size
 apt-get -y autoremove
 apt-get -y autoclean
 apt-get -y clean
+e4defrag /
 fstrim -v /
