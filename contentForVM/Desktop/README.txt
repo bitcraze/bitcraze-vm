@@ -25,7 +25,6 @@ Here is a non-exhaustive list of what's included:
  * Most of our projects pre-cloned
  * QTCreator
  * Firefox
- * KiCad
  * vscode prepared for compiling/debugging/flashing the Crazyflie firmware
  * SDCC 3.2 for compiling of Crazyradio firmware
 
