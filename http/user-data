@@ -1,0 +1,26 @@
+#cloud-config
+autoinstall:
+  version: 1
+  early-commands:
+    # Workaround for ssh timeout bug
+    - 'sudo systemctl stop ssh'
+  locale: en_US
+  # debconf-selections:
+  #   "gdm3    shared/default-x-display-manager select lightdm
+  #   lightdm shared/default-x-display-manager select lightdm"
+  packages:
+    - ubuntu-desktop
+  network:
+    network:
+      version: 2
+      ethernets:
+        enp0s3:
+          dhcp4: true
+  identity:
+    hostname: bitcraze-vm
+    username: bitcraze
+    # password: crazyflie
+    password: "$y$j9T$NM5S7YplkhjkJRF.Am0jl1$JoT/aJt3MzfXNV3cV0rPr14DbeAQ3C8qjUyQVLr1WR/"
+  ssh:
+    install-server: true
+    allow-pw: yes

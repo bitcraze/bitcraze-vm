@@ -11,32 +11,19 @@
       "ssh_username": "{{user `user`}}",
       "type": "virtualbox-ovf",
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2",
-          "--memory",
-          "2048",
-          "--vram",
-          "16",
-          "--mouse",
-          "usbtablet",
-          "--rtcuseutc",
-          "on",
-          "--audio",
-          "pulse",
-          "--audiocodec",
-          "ad1980",
-          "--usb",
-          "on",
-          "--usbxhci",
-          "on",
-          "--nestedpaging",
-          "off",
-          "--graphicscontroller",
-          "vmsvga"
-        ],
+        ["modifyvm", "{{.Name}}", "--audio", "pulse"],
+        ["modifyvm", "{{.Name}}", "--audiocodec", "ad1980"],
+        ["modifyvm", "{{.Name}}", "--usb", "on"],
+        ["modifyvm", "{{.Name}}", "--usb-xhci", "on"],
+        ["modifyvm", "{{.Name}}", "--vrde", "off"],
+        ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"],
+        ["modifyvm", "{{.Name}}", "--vram", "64"],
+        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
+        ["modifyvm", "{{.Name}}", "--mouse", "usbtablet"],
+        ["modifyvm", "{{.Name}}", "--nestedpaging", "off"],
+        ["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"],
         [
           "storageattach",
           "{{.Name}}",
@@ -48,8 +35,7 @@
           "on",
           "--discard",
           "on"
-        ],
-        ["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"]
+        ]
       ],
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm-name`}}"
@@ -57,43 +43,28 @@
   ],
   "provisioners": [
     {
-      "destination": "/home/bitcraze/update_all_projects.sh",
       "source": "{{user `contentDir`}}/update_all_projects.sh",
+      "destination": "/home/bitcraze/update_all_projects.sh",
       "type": "file"
     },
     {
-      "destination": "/home/bitcraze/Desktop",
-      "source": "{{user `contentDir`}}/desktop/",
+      "source": "{{user `contentDir`}}/Desktop",
+      "destination": "/home/bitcraze",
       "type": "file"
     },
     {
-      "destination": "/home/bitcraze/Pictures",
-      "source": "{{user `contentDir`}}/pictures/",
+      "source": "{{user `contentDir`}}/Pictures",
+      "destination": "/home/bitcraze",
       "type": "file"
     },
     {
-      "destination": "/home/bitcraze/{{user `gccFile`}}",
-      "source": "{{user `contentDir`}}/{{user `gccFile`}}",
-      "type": "file"
-    },
-    {
-      "destination": "/home/bitcraze/{{user `eclipseFile`}}",
-      "source": "{{user `contentDir`}}/{{user `eclipseFile`}}",
-      "type": "file"
-    },
-    {
-      "destination": "/home/bitcraze/{{user `eclipsePrj`}}",
-      "source": "{{user `contentDir`}}/{{user `eclipsePrj`}}",
-      "type": "file"
-    },
-    {
-      "destination": "/home/bitcraze/{{user `openocd`}}",
-      "source": "{{user `contentDir`}}/{{user `openocd`}}",
-      "type": "file"
+      "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sh '{{ .Path }}'",
+      "script": "provision.sh",
+      "type": "shell"
     },
     {
       "execute_command": "echo '{{user `password`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
-      "script": "provision.sh",
+      "script": "provision-sudo.sh",
       "type": "shell"
     }
   ],

@@ -7,54 +7,59 @@ The Bitcraze VM contains everything you need for running the Bitcraze projects a
 
 Here is a non-exhaustive list of what's included:
 
-* Xubuntu 20.04 pre-configured
+* Ubuntu live server 22.04 pre-configured
 * VirtualBox guest additions pre-installed
 * udev rules and pre-configured USB filtering for the Crazyradio and it's bootloader (NRF BOOT)
 * Most of our projects pre-cloned
 * QTCreator
 * Firefox
-* KiCad
 * vscode prepared for compiling/debugging/flashing the Crazyflie firmware
 * SDCC 3.2 for compiling of Crazyradio firmware
 
 
-Downloading
------------
+## Downloading
+
 The Bitcraze VM can be downloaded via the [Github Release Page](https://github.com/bitcraze/bitcraze-vm/releases)
 
-Installing
-----------
-The virtual appliance can be imported into [VirtualBox](https://www.virtualbox.org/ "VirtualBox"). You will need the extention package of virtual box to be able to use the USB device. Go to [Oracles download page](https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html?msclkid=be59f68fcf9f11ec801dcf4ea944dd1d) to install both virtual box and the expansion pack.
+## Installing
 
-It can be used with other virtual machine manager however setting up the guest addition might be required. The following have been tested 
+The virtual appliance can be imported into [VirtualBox](https://www.virtualbox.org/ "VirtualBox"). You will need the
+extention package of virtual box to be able to use the USB device. Go to
+[Oracles download page](https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html?msclkid=be59f68fcf9f11ec801dcf4ea944dd1d)
+to install both virtual box and the expansion pack.
+
+It can be used with other virtual machine managers, however setting up the guest addition might be required. The
+following have been tested
 
 * [Gnome Boxes](https://wiki.gnome.org/Apps/Boxes)
 * [VM Player](http://www.vmware.com/products/player/ "WM Player")
 
-Using the virtual machine
--------------------------
-After importing just run the machine. It logs in automatically but use the following credentials if needed:
+## Using the virtual machine
+
+After importing just run the machine. Log in with the following credentials:
 ```
 User: bitcraze
 Pass: crazyflie
 ```
 
-In the virtual machine double click the **“update all projects”** icon on the desktop. This pulls down the latest source code from GitHub for all projects.
+In the virtual machine double click the **“update all projects”** icon on the desktop. This pulls down the latest source
+code from GitHub for all projects.
 
-install hardware
--------------------------
+## install hardware
 
 Insert Crazyradio PA in a USB port.
 Insert game controller in a USB port.
 
-Optimizing for Use
--------------------------
-For faster USB connection with the Crazyradio PA it is advised to filter the USB device at startup of the VM. Go to *settings->USB*, make sure that USB 3.0 is enabled and add a USB device filter for the Crazyflie PA, which should be called 'Bitcraze Crazyradio PA USB Dongle [9955]'.
+## Optimizing for Use
 
-Also just to be sure, install the guest addition pack from inside the VM by typing: 
-`sudo apt-get install virtualbox-guest-additions-iso`
+For faster USB connection with the Crazyradio PA it is advised to filter the USB device at startup of the VM. Go to
+*settings->USB*, make sure that USB 3.0 is enabled and add a USB device filter for the Crazyflie PA, which should be
+called 'Bitcraze Crazyradio PA USB Dongle [9955]'.
 
-For the rest of the performance of your VM, you can try to increase the base memory (Settings/System/Motherboard), the CPU's available (Settings/System/Processor), enable hardware acceleration and select Hyper-V (Settings/System/Acceleration) or increase the video memory with 3D acceleration enabled (Settings/Display/Screen). This requires some adjusting as this could be different per system you are running the VM from.
+For the rest of the performance of your VM, you can try to increase the base memory (Settings/System/Motherboard), the
+CPU's available (Settings/System/Processor), enable hardware acceleration and select Hyper-V (Settings/System/Acceleration)
+or increase the video memory with 3D acceleration enabled (Settings/Display/Screen). This requires some adjusting as
+this could be different per system you are running the VM from.
 
 # How to build the Bitcraze VM image
 
@@ -69,6 +74,8 @@ For the rest of the performance of your VM, you can try to increase the base mem
 
 1. Run ```createBitcrazeVM.sh```
 2. Wait 40-60 minutes depending on machine and internet connection speed
+
+The resulting .ova can be found in `output-virtualbox-ovf/BitcrazeVM.ova`.
 
 ### What does createBitcrazeVM.sh do?
 Run the two [Packer](https://www.packer.io) templates

@@ -14,18 +14,17 @@ The virtual machine
  * The username is: bitcraze
  * The password is: crazyflie
  * The virtual machine has 30GB drive and 2 GB of RAM
- * The virtual machine is using Xubuntu 20.04 LTS Core (minimal) install.
+ * The virtual machine is using Ubuntu Live Server 22.04 LTS install.
 
 Installed software
 ------------------
 Here is a non-exhaustive list of what's included:
- * Xubuntu 20.04 pre-configured
+ * Ubuntu 22.04 pre-configured
  * VirtualBox guest additions pre-installed
  * udev rules and pre-configured USB filtering for the Crazyradio and it's bootloader (NRF BOOT)
  * Most of our projects pre-cloned
  * QTCreator
  * Firefox
- * KiCad
  * vscode prepared for compiling/debugging/flashing the Crazyflie firmware
  * SDCC 3.2 for compiling of Crazyradio firmware
 
@@ -35,7 +34,7 @@ repos: https://github.com/bitcraze/bitcraze-vm/tree/master/provision.sh
 
 Projects
 --------
-The following projects have been pre-cloned into the /home/bitcraze/projects 
+The following projects have been pre-cloned into the /home/bitcraze/projects
 directory:
  * crazyflie-pc-client
  * crazyflie-firmware
