@@ -23,6 +23,9 @@ The Bitcraze VM can be downloaded via the [Github Release Page](https://github.c
 
 ## Installing
 
+**Note**: Since the VM is an AMD64 install of Linux, it *does not work* on Apple-silicon Mac (M1/2/... processors).
+On an apple silicon mac you need to install the tools natively.
+
 The virtual appliance can be imported into [VirtualBox](https://www.virtualbox.org/ "VirtualBox"). You will need the
 extention package of virtual box to be able to use the USB device. Go to
 [Oracles download page](https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html?msclkid=be59f68fcf9f11ec801dcf4ea944dd1d)
